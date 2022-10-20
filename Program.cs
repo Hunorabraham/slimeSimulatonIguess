@@ -209,7 +209,16 @@ namespace stuff
         }
         static double ness(double raw)
         {
-            return (1 / raw) * Math.Abs(raw);
+            if(raw < 0){
+                raw = -1;
+            }
+            else if(raw > 0){
+                raw = 1;
+            }
+            else{
+                raw = 0;
+            }
+            return raw;
         }
     }
 }
