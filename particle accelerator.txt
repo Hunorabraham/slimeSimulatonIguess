@@ -1,0 +1,153 @@
+using System;
+using System.Threading;
+
+namespace slimer
+{
+    class particle
+    {
+        public double[] position = new double[2];
+        public double[] prevposition = new double[2];
+        public double speed = 0;
+        public double angle;
+        public particle(double posx, double posy, double speedx, double angley)
+        {
+            position[0] = posx;
+            position[1] = posy;
+            prevposition[0] = 0;
+            prevposition[1] = 0;
+            speed = speedx;
+            angle = angley;
+        }
+    }
+    class Program
+    {
+        static double distance = 2;
+        static void Main(string[] args)
+        {
+            Console.Title = "Suffering of the children of Anyád";
+            Console.CursorVisible = false;
+            Console.SetWindowSize(20, 20);
+            Console.SetWindowPosition(0, 0);
+            Random rnd = new Random();
+
+            particle axel = new particle((rnd.NextDouble())*10, (rnd.NextDouble()) * 10,0.1, (rnd.NextDouble() - 0.5) * -2 * Math.PI);
+            while (true)
+            {
+                axel = updateParticle(axel);
+                try
+                {
+                    Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), Convert.ToInt32(Math.Round(axel.position[1])));
+                }
+                catch 
+                {
+                    if (Convert.ToInt32(Math.Round(axel.position[0])) < 0 && Convert.ToInt32(Math.Round(axel.position[1])) < 0)
+                    {
+                        Console.SetCursorPosition(0, 0);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1 && Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1) 
+                    {
+                        Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) < 0)
+                    {
+                        Console.SetCursorPosition(0, Convert.ToInt32(Math.Round(axel.position[1])));
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1)
+                    {
+                        Console.SetCursorPosition(Console.WindowWidth - 1, Convert.ToInt32(Math.Round(axel.position[1])));
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[1])) < 0)
+                    {
+                        Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), 0);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
+                    {
+                        Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), Console.WindowHeight - 1);
+                        break;
+                    }
+                }
+                Console.Write("*");
+                Thread.Sleep(0);
+                try
+                {
+                    Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.prevposition[0])), Convert.ToInt32(Math.Round(axel.prevposition[1])));
+                }
+                catch
+                {
+                    if (Convert.ToInt32(Math.Round(axel.position[0])) < 0 && Convert.ToInt32(Math.Round(axel.position[1])) < 0)
+                    {
+                        Console.SetCursorPosition(0, 0);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1 && Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
+                    {
+                        Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) < 0)
+                    {
+                        Console.SetCursorPosition(0, Convert.ToInt32(Math.Round(axel.position[1])));
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1)
+                    {
+                        Console.SetCursorPosition(Console.WindowWidth - 1, Convert.ToInt32(Math.Round(axel.position[1])));
+                        break;
+                    }
+                    if (Convert.ToInt32(Math.Round(axel.position[1])) < 0)
+                    {
+                        Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), 0);
+                        break;
+                    }
+                    else if (Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
+                    {
+                        Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), Console.WindowHeight - 1);
+                        break;
+                    }
+                }
+                Console.Write(" ");
+            }
+        }
+        static particle updateParticle(particle prev)
+        {
+            prev.prevposition[0] = prev.position[0];
+            prev.prevposition[1] = prev.position[1];
+            prev.position[0] += prev.speed * Math.Sin(prev.angle);
+            prev.position[1] += prev.speed * Math.Cos(prev.angle);
+
+            if (prev.position[0] > Console.WindowWidth - 1)
+            {
+                prev.angle *= -1;
+                prev.position[0] = (Console.WindowWidth - 1) * 2 - prev.position[0];
+                prev.speed += 0.01;
+            }
+            else if (prev.position[0] < 0)
+            {
+                prev.angle *= -1;
+                prev.position[0] *= -1;
+                prev.speed += 0.01;
+            }
+            else if (prev.position[1] > Console.WindowHeight - 1)
+            {
+                prev.angle += ((1 / prev.angle) * Math.Abs(prev.angle)) * Math.Abs((Math.PI / 2 - Math.Abs(prev.angle)) * 2);
+                prev.position[1] = (Console.WindowHeight - 1) * 2 - prev.position[1];
+                prev.speed += 0.01;
+            }
+            else if (prev.position[1] < 0)
+            {
+                prev.angle -= ((1 / prev.angle) * Math.Abs(prev.angle)) * Math.Abs((Math.PI / 2 - Math.Abs(prev.angle)) * 2);
+
+                prev.position[1] *= -1;
+                prev.speed += 0.01;
+            }
+            
+            return prev;
+        }
+
+    }
+}
