@@ -43,32 +43,26 @@ namespace slimer
                     if (Convert.ToInt32(Math.Round(axel.position[0])) < 0 && Convert.ToInt32(Math.Round(axel.position[1])) < 0)
                     {
                         Console.SetCursorPosition(0, 0);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1 && Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1) 
                     {
                         Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) < 0)
                     {
                         Console.SetCursorPosition(0, Convert.ToInt32(Math.Round(axel.position[1])));
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1)
                     {
                         Console.SetCursorPosition(Console.WindowWidth - 1, Convert.ToInt32(Math.Round(axel.position[1])));
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[1])) < 0)
                     {
                         Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), 0);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
                     {
                         Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), Console.WindowHeight - 1);
-                        break;
                     }
                 }
                 Console.Write("*");
@@ -82,32 +76,26 @@ namespace slimer
                     if (Convert.ToInt32(Math.Round(axel.position[0])) < 0 && Convert.ToInt32(Math.Round(axel.position[1])) < 0)
                     {
                         Console.SetCursorPosition(0, 0);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1 && Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
                     {
                         Console.SetCursorPosition(Console.WindowWidth - 1, Console.WindowHeight - 1);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) < 0)
                     {
                         Console.SetCursorPosition(0, Convert.ToInt32(Math.Round(axel.position[1])));
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[0])) > Console.WindowWidth - 1)
                     {
                         Console.SetCursorPosition(Console.WindowWidth - 1, Convert.ToInt32(Math.Round(axel.position[1])));
-                        break;
                     }
                     if (Convert.ToInt32(Math.Round(axel.position[1])) < 0)
                     {
                         Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), 0);
-                        break;
                     }
                     else if (Convert.ToInt32(Math.Round(axel.position[1])) > Console.WindowHeight - 1)
                     {
                         Console.SetCursorPosition(Convert.ToInt32(Math.Round(axel.position[0])), Console.WindowHeight - 1);
-                        break;
                     }
                 }
                 Console.Write(" ");
